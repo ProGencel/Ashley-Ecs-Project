@@ -6,22 +6,23 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.progencel.progencel.components.BodyComponent;
 import com.progencel.progencel.components.TransformComponent;
 import com.progencel.progencel.components.VelocityComponent;
 
 public class MovementSystem extends IteratingSystem {
 
-    private final ComponentMapper<TransformComponent> tm = ComponentMapper.getFor(TransformComponent.class);
+    private final ComponentMapper<BodyComponent> tm = ComponentMapper.getFor(BodyComponent.class);
     private final ComponentMapper<VelocityComponent> vm = ComponentMapper.getFor(VelocityComponent.class);
 
     public MovementSystem()
     {
-        super(Family.all(TransformComponent.class, VelocityComponent.class).get());
+        super(Family.all(BodyComponent.class, VelocityComponent.class).get());
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        TransformComponent t = tm.get(entity);
+        BodyComponent t = tm.get(entity);
         VelocityComponent v = vm.get(entity);
 
         v.dy = 0;
@@ -44,7 +45,6 @@ public class MovementSystem extends IteratingSystem {
             v.dx = 1;
         }
 
-        t.x += v.dx;;
-        t.y += v.dy;
+        t.body.setLinearVelocity(v.dx*100,v.dy*100);
     }
 }

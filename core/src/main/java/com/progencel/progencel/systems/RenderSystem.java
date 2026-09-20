@@ -30,6 +30,7 @@ public class RenderSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        batch.draw(tex.get(entity).texture,trans.get(entity).x,trans.get(entity).y);
+        batch.draw(tex.get(entity).texture,trans.get(entity).x,trans.get(entity).y,
+            tex.get(entity).texture.getRegionWidth()*2,tex.get(entity).texture.getRegionHeight()*2);
     }
 }
