@@ -7,7 +7,6 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.progencel.progencel.components.BodyComponent;
-import com.progencel.progencel.components.TransformComponent;
 import com.progencel.progencel.components.VelocityComponent;
 
 public class MovementSystem extends IteratingSystem {
