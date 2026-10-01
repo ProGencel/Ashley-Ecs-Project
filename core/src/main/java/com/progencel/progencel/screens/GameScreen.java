@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -17,6 +19,7 @@ import com.progencel.progencel.components.VelocityComponent;
 import com.progencel.progencel.factories.EntityFactory;
 import com.progencel.progencel.systems.*;
 import com.progencel.progencel.utils.Constants;
+import com.progencel.progencel.utils.StaticBodyBuilder;
 import com.progencel.progencel.utils.TiledMapReader;
 
 public class GameScreen implements Screen {
@@ -26,6 +29,7 @@ public class GameScreen implements Screen {
     private FitViewport viewport;
     private World world;
     private final AssetManager assetManager;
+    private final Box2DDebugRenderer debugRenderer;
 
     private final OrthogonalTiledMapRenderer mapRenderer;
     private final OrthographicCamera camera;
@@ -33,9 +37,10 @@ public class GameScreen implements Screen {
     private final SpriteBatch batch = new SpriteBatch();
 
     public GameScreen(AssetManager assetManager) {
-        camera = new OrthographicCamera();
-        viewport = new FitViewport(10,10,camera);
-        mapRenderer = new OrthogonalTiledMapRenderer(assetManager.get("world/world.tmx"), Constants.UNIT_SCALE,batch);
+        this.camera = new OrthographicCamera();
+        this.viewport = new FitViewport(10,10,camera);
+        this.mapRenderer = new OrthogonalTiledMapRenderer(assetManager.get("world/world.tmx"), Constants.UNIT_SCALE,batch);
+        this.debugRenderer = new Box2DDebugRenderer();
         this.assetManager = assetManager;
     }
 
@@ -55,6 +60,12 @@ public class GameScreen implements Screen {
 
         Vector2 spawn = reader.getPoint("spawns","player_spawn");
 
+        StaticBodyBuilder walls = new StaticBodyBuilder(world);
+        for(Rectangle r : reader.getRects("collisions"))
+        {
+            walls.addRect(r);
+        }
+
         factory.createPlayer(spawn.x,spawn.y);
 
     }
@@ -67,6 +78,8 @@ public class GameScreen implements Screen {
         mapRenderer.render();
 
         engine.update(delta);
+
+        debugRenderer.render(world,camera.combined);
     }
 
     @Override

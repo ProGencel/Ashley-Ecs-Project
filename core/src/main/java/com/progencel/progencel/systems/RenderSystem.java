@@ -36,6 +36,7 @@ public class RenderSystem extends IteratingSystem {
         float w = r.getRegionWidth() * Constants.UNIT_SCALE;
         float h = r.getRegionHeight() * Constants.UNIT_SCALE;
 
-        batch.draw(r, trans.get(entity).x, trans.get(entity).y, w, h);
+        TransformComponent t = trans.get(entity);
+        batch.draw(r, t.x - w / 2f, t.y, w, h);
     }
 }

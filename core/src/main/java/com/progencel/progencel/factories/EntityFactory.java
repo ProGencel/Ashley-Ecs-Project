@@ -6,7 +6,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.progencel.progencel.components.*;
@@ -29,7 +32,6 @@ public class EntityFactory {
 
     public Entity createPlayer(float x, float y)
     {
-
         Entity e = engine.createEntity();
 
         TransformComponent t = engine.createComponent(TransformComponent.class);
@@ -46,6 +48,15 @@ public class EntityFactory {
         bodyDef.position.set(x,y);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         b.body = world.createBody(bodyDef);
+
+        CircleShape shape = new CircleShape();
+        shape.setRadius(0.35f);
+        shape.setPosition(new Vector2(0, 0.35f));
+
+        FixtureDef fdef = new FixtureDef();
+        fdef.shape = shape;
+
+        b.body.createFixture(fdef);
         e.add(b);
 
         AnimationComponent ac = engine.createComponent(AnimationComponent.class);
