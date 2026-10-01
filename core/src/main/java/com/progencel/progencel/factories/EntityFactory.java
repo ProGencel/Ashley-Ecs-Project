@@ -43,7 +43,7 @@ public class EntityFactory {
 
         BodyComponent b = engine.createComponent(BodyComponent.class);
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(100,100);
+        bodyDef.position.set(x,y);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         b.body = world.createBody(bodyDef);
         e.add(b);

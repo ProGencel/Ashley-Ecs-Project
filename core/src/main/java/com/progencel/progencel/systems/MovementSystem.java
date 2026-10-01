@@ -62,6 +62,6 @@ public class MovementSystem extends IteratingSystem {
             s.set(CharacterState.RUN);
         }
 
-        t.body.setLinearVelocity(v.dx*100,v.dy*100);
+        t.body.setLinearVelocity(v.dx,v.dy);
     }
 }

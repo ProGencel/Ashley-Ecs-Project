@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="22">
+ <tileset firstgid="1" name="Indoor" tilewidth="16" tileheight="16" tilecount="1424" columns="16">
+  <image source="Interiors_free_16x16.png" width="256" height="1424"/>
+ </tileset>
+ <tileset firstgid="1425" name="Outdoor" tilewidth="16" tileheight="16" tilecount="391" columns="17">
+  <image source="Room_Builder_free_16x16.png" width="272" height="368"/>
+ </tileset>
+ <layer id="1" name="ground" width="10" height="10">
+  <data encoding="csv">
+1510,1511,1511,1511,1511,1511,1511,1511,1511,1512,
+1527,1528,1528,1528,1528,1528,1528,1528,1528,1529,
+1589,1608,1591,1608,1608,1591,1589,1608,1608,1590,
+1608,1606,1591,1608,1591,1606,1608,1590,1607,1590,
+1608,1590,1590,1607,1590,1590,1591,1608,1607,1607,
+1607,1589,1590,1590,1589,1606,1591,1589,1591,1607,
+1591,1608,1606,1608,1591,1591,1608,1608,1589,1590,
+1590,1589,1589,1590,1608,1607,1589,1606,1591,1608,
+1606,1589,1590,1591,1608,1589,1606,1590,1607,1608,
+1608,1590,1589,1589,1606,1589,1591,1589,1607,1589
+</data>
+ </layer>
+ <layer id="2" name="decor_layer" width="10" height="10">
+  <data encoding="csv">
+0,0,1067,1068,0,0,0,0,0,0,
+0,0,1083,1084,0,0,0,0,0,0,
+1057,0,0,0,0,0,0,0,0,1057,
+1073,0,0,0,0,0,0,0,0,1073,
+0,0,0,248,249,250,251,0,0,0,
+0,0,0,264,265,266,267,0,0,0,
+0,0,0,280,281,282,283,0,0,0,
+0,0,343,161,162,163,164,344,0,0,
+0,0,359,177,178,179,180,360,0,0,
+0,0,0,193,194,195,196,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="collisions">
+  <object id="11" x="0.125" y="23.75" width="159.75" height="2"/>
+  <object id="14" x="160" y="25" width="1.5" height="135.125"/>
+  <object id="15" x="-0.875" y="23.4375" width="1.5" height="135.125"/>
+  <object id="16" x="0.25" y="160.688" width="1.5" height="161" rotation="-90"/>
+ </objectgroup>
+ <objectgroup id="4" name="spawns">
+  <object id="21" name="player_spawn" x="77.75" y="48.375">
+   <point/>
+  </object>
+ </objectgroup>
+</map>

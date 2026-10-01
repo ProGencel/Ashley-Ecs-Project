@@ -6,8 +6,10 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.progencel.progencel.components.TextureComponent;
 import com.progencel.progencel.components.TransformComponent;
+import com.progencel.progencel.utils.Constants;
 
 public class RenderSystem extends IteratingSystem {
 
@@ -30,7 +32,10 @@ public class RenderSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        batch.draw(tex.get(entity).texture,trans.get(entity).x,trans.get(entity).y,
-            tex.get(entity).texture.getRegionWidth()*2,tex.get(entity).texture.getRegionHeight()*2);
+        TextureRegion r = tex.get(entity).texture;
+        float w = r.getRegionWidth() * Constants.UNIT_SCALE;
+        float h = r.getRegionHeight() * Constants.UNIT_SCALE;
+
+        batch.draw(r, trans.get(entity).x, trans.get(entity).y, w, h);
     }
 }
