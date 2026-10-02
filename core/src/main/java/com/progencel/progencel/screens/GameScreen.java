@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -13,10 +12,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.progencel.progencel.components.TextureComponent;
-import com.progencel.progencel.components.TransformComponent;
-import com.progencel.progencel.components.VelocityComponent;
 import com.progencel.progencel.factories.EntityFactory;
+import com.progencel.progencel.physics.GameContactListener;
 import com.progencel.progencel.systems.*;
 import com.progencel.progencel.utils.Constants;
 import com.progencel.progencel.utils.StaticBodyBuilder;
@@ -49,6 +46,7 @@ public class GameScreen implements Screen {
 
         TiledMapReader reader = new TiledMapReader(mapRenderer.getMap(),Constants.UNIT_SCALE);
         world = new World(new Vector2(0,0),true);
+        world.setContactListener(new GameContactListener());
         engine = new Engine();
         factory = new EntityFactory(engine,world,assetManager.get("atlas/AshleyLearning.atlas"));
 
@@ -81,6 +79,26 @@ public class GameScreen implements Screen {
         for(TiledMapReader.MapTileObject o : reader.getTileObjects("object_decors"))
         {
             factory.createProp(o.region,o.x + o.width/2,o.y);
+        }
+
+        for(TiledMapReader.MapTileObject o : reader.getTileObjects("sensor_layer"))
+        {
+            factory.createProp(o.region,o.x + o.width/2,o.y);
+        }
+
+        for(TiledMapReader.MapShape s : reader.getShapes("sensor_layer"))
+        {
+            if(s.type != TiledMapReader.MapShape.Type.ELLIPSE)
+            {
+                continue;
+            }
+
+            float rad = s.bounds.width/2;
+            float cx = s.bounds.x + rad;
+            float cy = s.bounds.y + s.bounds.height / 2f;
+            String type = TiledMapReader.getString(s.properties, "type", "");
+
+            walls.addSensorCircle(cx, cy, rad, type);
         }
 
         factory.createPlayer(spawn.x,spawn.y);

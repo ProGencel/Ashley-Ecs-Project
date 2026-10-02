@@ -65,6 +65,7 @@ public class EntityFactory {
         bodyDef.position.set(x,y);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         b.body = world.createBody(bodyDef);
+        b.body.setUserData(e);
 
         CircleShape shape = new CircleShape();
         shape.setRadius(0.35f);

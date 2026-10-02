@@ -21,6 +21,21 @@ public class StaticBodyBuilder {
         attach(shape);
     }
 
+    public void addSensorCircle(float x, float y, float rad, Object userData)
+    {
+        CircleShape shape = new CircleShape();
+        shape.setPosition(new Vector2(x,y));
+        shape.setRadius(rad);
+
+        FixtureDef fdef = new FixtureDef();
+        fdef.shape = shape;
+        fdef.isSensor = true;
+
+        Fixture f = body.createFixture(fdef);
+        f.setUserData(userData);
+        shape.dispose();
+    }
+
     public void addCircle(float x, float y, float radius) {
         CircleShape shape = new CircleShape();
         shape.setPosition(new Vector2(x, y));
