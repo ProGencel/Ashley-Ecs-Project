@@ -52,10 +52,10 @@ public class GameScreen implements Screen {
         engine = new Engine();
         factory = new EntityFactory(engine,world,assetManager.get("atlas/AshleyLearning.atlas"));
 
-        engine.addSystem(new AnimationSystem());
         engine.addSystem(new MovementSystem());
         engine.addSystem(new PhysicSystem(world));
         engine.addSystem(new PhysicSyncSystem());
+        engine.addSystem(new AnimationSystem());
         engine.addSystem(new RenderSystem(batch));
 
         Vector2 spawn = reader.getPoint("spawns","player_spawn");
@@ -64,6 +64,23 @@ public class GameScreen implements Screen {
         for(Rectangle r : reader.getRects("collisions"))
         {
             walls.addRect(r);
+        }
+
+        for(TiledMapReader.MapShape s : reader.getTileObjectShapes("object_decors"))
+        {
+            if(s.type == TiledMapReader.MapShape.Type.POLYGON)
+            {
+                walls.addPolygon(s.vertices);
+            }
+            else
+            {
+                walls.addRect(s.bounds);
+            }
+        }
+
+        for(TiledMapReader.MapTileObject o : reader.getTileObjects("object_decors"))
+        {
+            factory.createProp(o.region,o.x + o.width/2,o.y);
         }
 
         factory.createPlayer(spawn.x,spawn.y);
@@ -79,7 +96,7 @@ public class GameScreen implements Screen {
 
         engine.update(delta);
 
-        debugRenderer.render(world,camera.combined);
+       // debugRenderer.render(world,camera.combined);
     }
 
     @Override
@@ -106,5 +123,7 @@ public class GameScreen implements Screen {
     public void dispose() {
         batch.dispose();
         world.dispose();
+        mapRenderer.dispose();
+        debugRenderer.dispose();
     }
 }

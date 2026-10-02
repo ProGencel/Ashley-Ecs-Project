@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="22">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="33">
  <tileset firstgid="1" name="Indoor" tilewidth="16" tileheight="16" tilecount="1424" columns="16">
   <image source="Interiors_free_16x16.png" width="256" height="1424"/>
+  <tile id="214">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="2.98791" y="2.97514" width="10.0491" height="7.9933"/>
+   </objectgroup>
+  </tile>
+  <tile id="215">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6.97778" y="9.93333" width="9.02222" height="6.06667"/>
+   </objectgroup>
+  </tile>
+  <tile id="216">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="-0.0222222" y="8.97778" width="16.0222" height="7.02222"/>
+   </objectgroup>
+  </tile>
+  <tile id="217">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="9.95556" width="8.95556" height="6.04444"/>
+   </objectgroup>
+  </tile>
+  <tile id="231">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6.95556" y="0" width="9.04444" height="7.95556"/>
+   </objectgroup>
+  </tile>
+  <tile id="232">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0" y="0" width="16.0222" height="8.88889"/>
+   </objectgroup>
+  </tile>
+  <tile id="233">
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="0.444444" y="0.4" width="8.62222" height="7.64444"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="1425" name="Outdoor" tilewidth="16" tileheight="16" tilecount="391" columns="17">
   <image source="Room_Builder_free_16x16.png" width="272" height="368"/>
@@ -24,16 +59,26 @@
   <data encoding="csv">
 0,0,1067,1068,0,0,0,0,0,0,
 0,0,1083,1084,0,0,0,0,0,0,
-1057,0,0,0,0,0,0,0,0,1057,
-1073,0,0,0,0,0,0,0,0,1073,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
 0,0,0,248,249,250,251,0,0,0,
 0,0,0,264,265,266,267,0,0,0,
 0,0,0,280,281,282,283,0,0,0,
-0,0,343,161,162,163,164,344,0,0,
-0,0,359,177,178,179,180,360,0,0,
-0,0,0,193,194,195,196,0,0,0
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="5" name="object_decors">
+  <object id="25" gid="234" x="96" y="128" width="16" height="16"/>
+  <object id="26" gid="233" x="80" y="128" width="16" height="16"/>
+  <object id="27" gid="232" x="64" y="128" width="16" height="16"/>
+  <object id="28" gid="216" x="64" y="112" width="16" height="16"/>
+  <object id="29" gid="217" x="80" y="112" width="16" height="16"/>
+  <object id="30" gid="218" x="96" y="112" width="16" height="16"/>
+  <object id="31" gid="215" x="52.5" y="124.125" width="16" height="16"/>
+  <object id="32" gid="215" x="106.5" y="123.75" width="16" height="16"/>
+ </objectgroup>
  <objectgroup id="3" name="collisions">
   <object id="11" x="0.125" y="23.75" width="159.75" height="2"/>
   <object id="14" x="160" y="25" width="1.5" height="135.125"/>

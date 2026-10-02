@@ -1,5 +1,6 @@
 package com.progencel.progencel.utils;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -36,6 +37,18 @@ public class TiledMapReader {
             this.bounds = bounds;
             this.vertices = vertices;
             this.properties = properties;
+        }
+    }
+
+    public static class MapTileObject {
+        public final TextureRegion region;
+        public final float x, y;          // sol alt köşe, dünya birimi
+        public final float width, height; // dünya birimi
+        public final MapProperties properties;
+
+        MapTileObject(TextureRegion region, float x, float y, float w, float h, MapProperties p) {
+            this.region = region; this.x = x; this.y = y;
+            this.width = w; this.height = h; this.properties = p;
         }
     }
 
@@ -107,6 +120,36 @@ public class TiledMapReader {
     // ------------------------------------------------------------------
     // NESNE KATMANLARI: ham nesne erişimi
     // ------------------------------------------------------------------
+
+    /** Object layer'a yerleştirilmiş tile'ların (masa, sandık vb.) hitbox şekilleri. */
+    public Array<MapShape> getTileObjectShapes(String objectLayerName) {
+        Array<MapShape> result = new Array<>();
+        for (MapObject obj : getLayer(objectLayerName).getObjects()) {
+            if (!(obj instanceof TiledMapTileMapObject)) continue;
+            TiledMapTileMapObject t = (TiledMapTileMapObject) obj;
+
+            for (MapObject shape : t.getTile().getObjects()) {
+                MapShape s = toShape(shape, t.getX(), t.getY());
+                if (s != null) result.add(s);
+            }
+        }
+        return result;
+    }
+
+    public Array<MapTileObject> getTileObjects(String objectLayerName) {
+        Array<MapTileObject> result = new Array<>();
+        for (MapObject obj : getLayer(objectLayerName).getObjects()) {
+            if (!(obj instanceof TiledMapTileMapObject)) continue;
+            TiledMapTileMapObject t = (TiledMapTileMapObject) obj;
+            TextureRegion r = t.getTile().getTextureRegion();
+
+            result.add(new MapTileObject(r,
+                t.getX() * scale, t.getY() * scale,
+                r.getRegionWidth() * scale, r.getRegionHeight() * scale,
+                t.getProperties()));
+        }
+        return result;
+    }
 
     public MapObject getObject(String layerName, String objectName) {
         MapObject obj = getLayer(layerName).getObjects().get(objectName);

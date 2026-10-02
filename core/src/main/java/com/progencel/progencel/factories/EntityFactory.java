@@ -30,6 +30,23 @@ public class EntityFactory {
         this.atlas = atlas;
     }
 
+    public Entity createProp(TextureRegion texture, float x, float y)
+    {
+        Entity e = engine.createEntity();
+
+        TransformComponent tc = engine.createComponent(TransformComponent.class);
+        tc.x = x;
+        tc.y = y;
+
+        TextureComponent tec = engine.createComponent(TextureComponent.class);
+        tec.texture = texture;
+
+        e.add(tc);
+        e.add(tec);
+        engine.addEntity(e);
+        return e;
+    }
+
     public Entity createPlayer(float x, float y)
     {
         Entity e = engine.createEntity();
