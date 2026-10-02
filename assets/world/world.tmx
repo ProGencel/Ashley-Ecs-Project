@@ -4,22 +4,22 @@
   <image source="Interiors_free_16x16.png" width="256" height="1424"/>
   <tile id="214">
    <objectgroup draworder="index" id="2">
-    <object id="1" x="2.98791" y="2.97514" width="10.0491" height="7.9933"/>
+    <object id="1" x="2.93683" y="7.31655" width="10.1002" height="3.65189"/>
    </objectgroup>
   </tile>
   <tile id="215">
    <objectgroup draworder="index" id="2">
-    <object id="1" x="6.97778" y="9.93333" width="9.02222" height="6.06667"/>
+    <object id="1" x="7.01609" y="11.8231" width="8.98391" height="4.17688"/>
    </objectgroup>
   </tile>
   <tile id="216">
    <objectgroup draworder="index" id="2">
-    <object id="1" x="-0.0222222" y="8.97778" width="16.0222" height="7.02222"/>
+    <object id="1" x="-0.0222222" y="11.9657" width="16.0222" height="4.03431"/>
    </objectgroup>
   </tile>
   <tile id="217">
    <objectgroup draworder="index" id="2">
-    <object id="1" x="0" y="9.95556" width="8.95556" height="6.04444"/>
+    <object id="1" x="0" y="11.2708" width="9.05771" height="4.72925"/>
    </objectgroup>
   </tile>
   <tile id="231">
